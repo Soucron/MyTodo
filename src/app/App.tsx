@@ -1,9 +1,11 @@
 
 
+
 function App() {
 
-  return (
-    <div className={' w-screen h-screen bg-blue-50'}> hi</div>
+  return (<div>
+      </div>
+
   )
 }
 
