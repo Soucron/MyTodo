@@ -18,7 +18,7 @@ export const TodolistBar = () => {
                     </button>
                     <button
                         className="w-[40px] h-10 row-start-2 bg-red-500 border-black border rounded transform active:scale-75 transition-transform">
-                        <img src="src/common/assets/remove.svg" alt="Delete"/>
+                        <img src='src/common/assets/remove.svg' alt="Delete"/>
                     </button>
 
                 </div>

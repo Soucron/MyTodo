@@ -1,7 +1,7 @@
-import {Task} from './Task/Task.tsx';
-import {TodolistButtons} from '../../../common/components/Todolist/TodolistButtons/TodolistButtons.tsx';
-import {TodolistInput} from '../../../common/components/Todolist/TodolistInput/TodolistInput.tsx';
-import {TodolistTitle} from '../../../common/components/Todolist/TodolistTitle/TodolistTitle.tsx';
+import {Task} from './Tasks/Task/Task.tsx';
+import {TodolistButtons} from './TodolistButtons/TodolistButtons.tsx';
+import {TodolistInput} from './TodolistInput/TodolistInput.tsx';
+import {TodolistTitle} from './TodolistTitle/TodolistTitle.tsx';
 
 
 export const Todolist = () => {
