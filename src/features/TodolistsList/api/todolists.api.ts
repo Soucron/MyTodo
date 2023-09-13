@@ -1,4 +1,5 @@
 import {instance} from '../../../common/api';
+import {AddTaskArg} from '../model/tasks/tasks.reducer.ts';
 
 
 export const todolistsApi = {
@@ -11,8 +12,8 @@ export const todolistsApi = {
     deleteTodolist(todolistId: string) {
         return instance.delete<BaseResponseType>(`todo-lists/${todolistId}`)
     },
-    updateTodolistTitle(todolistId: string, newTodolistTitle: string) {
-        return instance.put<BaseResponseType>(`todo-lists/${todolistId}`, {newTodolistTitle: newTodolistTitle})
+    updateTodolistTitle(arg: UpdateTodolistTitleArg) {
+        return instance.put<BaseResponseType>(`todo-lists/${arg.todolistId}`, {title: arg.newTitle})
     }
 
 }
@@ -21,11 +22,11 @@ export const  tasksApi = {
     getTasks(todolistId: string) {
         return instance.get<GetTasksResponseType>(`todo-lists/${todolistId}/tasks`)
     },
-    createTask(todolistId: string, newTaskTitle: string) {
-        return instance.post<BaseResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {newTaskTitle:newTaskTitle})
+    createTask(arg: AddTaskArg) {
+        return instance.post<BaseResponseType<{item: TaskType}>>(`todo-lists/${arg.todolistId}/tasks`, {title:arg.newTaskTitle})
     },
-    deleteTask(todolistId: string, taskId: string) {
-        return instance.delete<BaseResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
+    deleteTask(arg: DeleteTaskArg) {
+        return instance.delete<BaseResponseType>(`todo-lists/${arg.todolistId}/tasks/${arg.taskId}`)
     },
     updateTask(todolistId: string, taskId: string, taskModel: UpdateTaskModel) {
         return instance.put<BaseResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks/${taskId}`, taskModel)
@@ -67,7 +68,7 @@ type BaseResponseType<D = object> = {
     }
 }
 
-type TodolistType = {
+export type TodolistType = {
     id: string,
     addedDate: string,
     order: number,
@@ -77,8 +78,18 @@ type TodolistType = {
 type GetTasksResponseType = {
     error: string | null,
     totalCount: number,
-    item: TaskType[]
+    items: TaskType[]
 
+}
+
+export type DeleteTaskArg = {
+    todolistId : string,
+    taskId : string
+}
+
+export type UpdateTodolistTitleArg = {
+    todolistId: string,
+    newTitle: string
 }
 
 
