@@ -1,4 +1,5 @@
 import {instance} from '../../../common/api';
+import {TaskPriorities, TaskStatuses} from '../../../common/enums';
 import {AddTaskArg} from '../model/tasks/tasks.reducer.ts';
 
 
@@ -28,7 +29,7 @@ export const  tasksApi = {
     deleteTask(arg: DeleteTaskArg) {
         return instance.delete<BaseResponseType>(`todo-lists/${arg.todolistId}/tasks/${arg.taskId}`)
     },
-    updateTask(todolistId: string, taskId: string, taskModel: UpdateTaskModel) {
+    updateTask(todolistId: string, taskId: string, taskModel: UpdateTaskModelType) {
         return instance.put<BaseResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks/${taskId}`, taskModel)
     }
 }
@@ -47,15 +48,7 @@ type TaskType = {
     addedDate: string
 }
 
-type UpdateTaskModel = {
-    title: string,
-    description: string,
-    completed: boolean,
-    status: number,
-    priority: number,
-    startDate: string,
-    deadline: string
-}
+
 
 
 type BaseResponseType<D = object> = {
@@ -91,6 +84,31 @@ export type UpdateTodolistTitleArg = {
     todolistId: string,
     newTitle: string
 }
+
+export type UpdateTaskModelType = {
+    title: string;
+    description: string;
+    status: TaskStatuses;
+    priority: TaskPriorities;
+    startDate: string;
+    deadline: string;
+};
+
+
+export type UpdateTaskArg = {
+    taskId: string;
+    domainModel: UpdateDomainTaskModelType;
+    todolistId: string;
+};
+
+export type UpdateDomainTaskModelType = {
+    title?: string;
+    description?: string;
+    status?: TaskStatuses;
+    priority?: TaskPriorities;
+    startDate?: string;
+    deadline?: string;
+};
 
 
 
